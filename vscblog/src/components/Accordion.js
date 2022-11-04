@@ -13,12 +13,13 @@ function Accordion({ title, children, isBold }) {
         }}
       >
         {expended ? <VscChevronDown /> : <VscChevronRight />}
-        <sapn>{title ? <strong>{title}</strong> : title}</sapn>
+        <span>{title ? <strong>{title}</strong> : title}</span>
       </AccordionWrap>
       {expended && <AccordionContentWrap>{children}</AccordionContentWrap>}
     </>
   );
 }
+
 export default Accordion;
 
 const AccordionWrap = styled.div`
