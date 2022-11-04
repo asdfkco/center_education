@@ -6,76 +6,106 @@ import Accordion from "./Accordion";
 
 const listArr = [
   {
-    icon: <HiOutlineDocument size={24} />,
-    path: "post",
+    icon: <HiOutlineDocument size={32} />,
+    path: "explorer",
+    content: (
+      <>
+        <Accordion title="OPEN POSTS" isBold={true}>
+          <Accordion title="📂VSCODE" isBold={true}>
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+        </Accordion>
+        <Accordion title="VSCODE">
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdasd
+          </Accordion>
+        </Accordion>
+      </>
+    ),
   },
   {
-    icon: <AiOutlineSearch size={24} />,
-    path: "test",
+    icon: <AiOutlineSearch size={32} />,
+    path: "search",
+    content: (
+      <>
+        <Accordion title="OPEN POSTS" isBold={true}>
+          <Accordion title="📂VSCODE" isBold={true}>
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+        </Accordion>
+        <Accordion title="VSCODE">
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdasd
+          </Accordion>
+        </Accordion>
+      </>
+    ),
   },
 ];
 
 function Main() {
   const [selected, setSelected] = useState(0);
-
   return (
-    <Wrap>
+    <Warp>
       <LeftBar>
         {listArr.map((one, index) => (
-          <IconWrap
+          <IconWarp
             selected={selected === index}
             onClick={() => {
               setSelected(selected === index ? null : index);
             }}
           >
             {one.icon}
-          </IconWrap>
+          </IconWarp>
         ))}
       </LeftBar>
-      <LeftContent>
-        <p>{listArr[selected]?.path}</p>
-        <Accordion title="OPEN POSTS">내요오오오오오옹으시안</Accordion>
 
-      </LeftContent>
-    </Wrap>
+      {selected !== null && listArr[selected] && (
+        <LeftContent>
+          <p>{listArr[selected].path}</p>
+          {listArr[selected].content}
+        </LeftContent>
+      )}
+    </Warp>
   );
 }
 
 export default Main;
 
-const Wrap = styled.div`
+const Warp = styled.div`
   display: flex;
   height: 100vh;
-  background-color: white;
+  background-color: rgb(0, 0, 0);
 `;
-
-
-const IconWrap = styled.div`
+const LeftBar = styled.div`
+  height: 100%;
+  width: 50px;
+  background-color: #333333;
+`;
+const IconWarp = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px 0;
   cursor: pointer;
 
-
-  border-left: ${({ selected }) => (selected ? "2px" : "0px")} solid white;
-  
-  > svg {
-    color: ${({ selected }) => (selected ? "white" : "#a7a7a7a")};
+  border-left: ${({ selected }) => (selected ? 2 : 0)}px solid;
+  svg {
+    color: ${({ selected }) => (selected ? "white" : "a7a7a7")};
   }
 `;
-
-const LeftBar = styled.div`
-  width: 50px;
-  height: 100vh;
-  background-color: #333333;
-`;
-  
 const LeftContent = styled.div`
   width: 320px;
   height: 100%;
   background-color: #252526;
-  > p{
-    padding: 15px 0 0 10px;
-    color: #a7a7a7;
+  padding: 10px;
+
+  > p {
+    color: #7a7a7a;
   }
 `;
