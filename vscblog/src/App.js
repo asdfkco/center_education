@@ -58,6 +58,36 @@ function App() {
                 title: "Tech32",
                 path:"/Tech/Tech3/Tech32"
               },
+              {
+                type: "post",
+                title: "Tech33",
+                path:"/Tech/Tech3/Tech34"
+              },
+              {
+                type: "post",
+                title: "Tech34",
+                path:"/Tech/Tech3/Tech34"
+              },
+              {
+                type: "post",
+                title: "Tech35",
+                path:"/Tech/Tech3/Tech35"
+              },
+              {
+                type: "post",
+                title: "Tech36",
+                path:"/Tech/Tech3/Tech36"
+              },
+              {
+                type: "post",
+                title: "Tech37",
+                path:"/Tech/Tech3/Tech37"
+              },
+              {
+                type: "post",
+                title: "Tech38",
+                path:"/Tech/Tech3/Tech38"
+              },
             ],
           },
         ],

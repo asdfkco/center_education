@@ -8,8 +8,7 @@ import Appcontext from "../context/Appcontext";
 
 function Main() {
   const [selected, setSelected] = useState(null);
-  const {selectedPost,postData,openPost} = useContext(Appcontext);
-
+  const { selectedPost, postData, openPost } = useContext(Appcontext);
 
   const listArr = [
     {
@@ -21,8 +20,8 @@ function Main() {
             내요요요옹
           </Accordion>
           <Accordion title="VSCODE" isBold={true}>
-            {postData.map((one,index) => (
-              <Content {...one}key={index} />
+            {postData.map((one, index) => (
+              <Content {...one} key={index} />
             ))}
           </Accordion>
         </>
@@ -57,32 +56,33 @@ function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
-      <RightContent selected={selected}>
-        <div>
+      <RightWrap selected={selected}>
+        <RightHeader>
           {openPost.map((one) => {
             const patharr = one.split("/").filter(Boolean);
 
-            const data = patharr.reduce(
-              (sum,current,index) => {
+            const data = patharr.reduce((sum, current, index) => {
               const lastPath = patharr.length - 1 === index;
-              
 
               const target = sum.find(
-                (one) => 
-                one.title === current &&
-                one.type === (lastPath ? "post" : "directory")
+                (one) =>
+                  one.title === current &&
+                  one.type === (lastPath ? "post" : "directory")
               );
-              return lastPath ? target : target?.children
-            }, postData)
+              return lastPath ? target : target?.children;
+            }, postData);
 
             console.log(data);
 
-            return <div className={selectedPost === one ? "selected" : ""}>{data.title}</div>;
-        })}
-        </div>
-        {/* {JSON.stringify(openPost)} */}
-        {selectedPost}
-        </RightContent> 
+            return (
+              <div className={selectedPost === one ? "selected" : ""}>
+                {data.title}
+              </div>
+            );
+          })}
+        </RightHeader>
+        <RightContent selected={selected}>{selectedPost}</RightContent>
+      </RightWrap>
     </Wrap>
   );
 }
@@ -95,7 +95,7 @@ const IconWrap = styled.div`
   justify-content: center;
   padding: 10px 0;
   cursor: pointer;
-  
+
   border-left: ${({ selected }) => (selected ? 2 : 0)}px solid white;
   
   > svg {
@@ -127,29 +127,39 @@ const LeftContent = styled.div`
     color: #7a7a7a;
   }
   
-  @media(max-width: 540px){
+  @media (max-width: 540px) {
     width: 100%;
   }
   `;
 
-  const RightContent = styled.div`
-    background-color: #1e1e1e;
-    width: 100%;
-    @media(max-width: 520px){
-      display: ${({selected}) => (selected === null ? "block" : "none")};
-    }
-    >div:first-child{
-      display: flex;
-      >div{
-        width: 150px;
-        padding: 5px 10px;
-        background-color: #333333;
-        border-right:2px solid #1e1e1e;
+const RightContent = styled.div`
+  background-color: #1e1e1e;
+  height: calc(100% - 50px);
+  width: 100%;
+  @media (max-width: 520px) {
+    display: ${({ selected }) => (selected === null ? "block" : "none")};
+  }
+  `;
 
-        &.selected {
-          background-color: #1e1e1e;
-        }
+  const RightWrap = styled.div`
+    width: ${({selected})=>selected === null ? "calc(100% - 50px)" : "calc(100% - 320px - 50px)"};
+  `;
+  
+  const RightHeader = styled.div`
+    width: 100%;
+    height: 50px;
+    display: flex;
+    overflow-x: scroll;
+    background-color: #252526;
+    > div {
+      width: 150px;
+      min-width: 150px;
+      padding: 5px 10px;
+      background-color: #333333;
+      border-right: 2px solid #1e1e1e;
+  
+      &.selected {
+        background-color: #1e1e1e;
       }
     }
-
   `;
