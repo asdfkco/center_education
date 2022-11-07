@@ -15,7 +15,7 @@ function Accordion({ title, children, isBold }) {
         {expended ? <VscChevronDown /> : <VscChevronRight />}
         <span>{title ? <strong>{title}</strong> : title}</span>
       </AccordionWrap>
-      {expended && <AccordionContentWrap>{children}</AccordionContentWrap>}
+      {<AccordionContentWrap expended={expended}>{children}</AccordionContentWrap>}
     </>
   );
 }
@@ -37,5 +37,13 @@ const AccordionWrap = styled.div`
 `;
 
 const AccordionContentWrap = styled.div`
-  padding: 5px 0px 0px 20px;
+  max-height: ${({expended}) => (expended ? "1000px" : "0")};
+  overflow: hidden;
+  transition: ${({expended}) => 
+    expended ? "max-height 0.25s ease-in" : "max-height 0.15s ease-out"
+  };
+
+  user-select: none;
+  margin-bottom: 5px;
+  margin-left: 15px;
 `;

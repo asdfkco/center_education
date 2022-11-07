@@ -3,12 +3,14 @@ import { useContext } from "react";
 import Appcontext from "../context/Appcontext";
 import Accordion from "./Accordion";
 
-export default function Content({ type, title, children }) {
+export default function Content({ type, title, children ,path}) {
   const {  setSelectedPost, setOpenPost,openPost } = useContext(Appcontext);
 
   function selectedFunction(){
-    setSelectedPost(title);
-    setOpenPost([...openPost,title])
+    setSelectedPost(path);
+    if(!openPost.includes(path)){
+      setOpenPost([...openPost, path]);
+    }
   }
 
   return type === "directory" ? (
@@ -18,6 +20,6 @@ export default function Content({ type, title, children }) {
       ))}
     </Accordion>
   ) : (
-    <div onClick={selectedFunction}>&nbsp;&nbsp;&nbsp;&nbsp;📝{title}</div>
+    <div onClick={selectedFunction}>&nbsp;&nbsp;📝{title}</div>
   );
 }
