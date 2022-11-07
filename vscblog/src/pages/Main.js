@@ -8,7 +8,8 @@ import Appcontext from "../context/Appcontext";
 
 function Main() {
   const [selected, setSelected] = useState(null);
-  const { selectedPost, postData, openPost } = useContext(Appcontext);
+  const { selectedPost, postData, openPost, setSelectedPost ,setOpenPost} =
+    useContext(Appcontext);
 
   const listArr = [
     {
@@ -58,7 +59,7 @@ function Main() {
       )}
       <RightWrap selected={selected}>
         <RightHeader>
-          {openPost.map((one) => {
+          {openPost.map((one,index) => {
             const patharr = one.split("/").filter(Boolean);
 
             const data = patharr.reduce((sum, current, index) => {
@@ -75,8 +76,25 @@ function Main() {
             console.log(data);
 
             return (
-              <div className={selectedPost === one ? "selected" : ""}>
-                {data.title}
+              <div
+                className={selectedPost === one ? "selected" : ""}
+                onClick={() => {
+                  setSelectedPost(data.path);
+                }}
+                key={index}
+              >
+                📝{data.title}
+                <span onClick={(e) => {
+                  e.stopPropagation();
+                  const openPostFilter = openPost.filter(
+                    (one) => one !== data.path
+                  );
+                  setOpenPost(openPost.filter(one => one !== data.path));
+
+                  setSelectedPost(
+                    openPostFilter.length !== 0 ? openPostFilter[0].path : null
+                  )
+                }}>x</span>
               </div>
             );
           })}
@@ -89,6 +107,31 @@ function Main() {
 
 export default Main;
 
+const RightHeader = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  overflow-x: scroll;
+  background-color: #252526;
+  > div {
+    width: 150px;
+    min-width: 150px;
+    padding: 5px 10px;
+    background-color: #333333;
+    border-right: 2px solid #1e1e1e;
+    position: relative;
+    cursor: pointer;
+    &.selected {
+      background-color: #1e1e1e;
+    }
+
+    > span{
+      position: absolute;
+      right: 15px;
+      top: 10px;
+    }
+  }
+`;
 
 const IconWrap = styled.div`
   display: flex;
@@ -97,23 +140,23 @@ const IconWrap = styled.div`
   cursor: pointer;
 
   border-left: ${({ selected }) => (selected ? 2 : 0)}px solid white;
-  
+
   > svg {
     color: ${({ selected }) => (selected ? "white" : "#7a7a7a")};
   }
-  `;
+`;
 
 const Wrap = styled.div`
   display: flex;
   height: 100vh;
-  `;
+`;
 
 const LeftBar = styled.div`
   width: 50px;
   min-width: 50px;
   height: 100%;
   background-color: #333333;
-  `;
+`;
 
 const LeftContent = styled.div`
   width: 320px;
@@ -121,45 +164,29 @@ const LeftContent = styled.div`
   height: 100%;
   background-color: #252526;
   padding: 10px;
-  
+
   > p {
     padding-bottom: 10px;
     color: #7a7a7a;
   }
-  
+
   @media (max-width: 540px) {
     width: 100%;
   }
-  `;
+`;
 
 const RightContent = styled.div`
   background-color: #1e1e1e;
-  height: calc(100% - 50px);
   width: 100%;
+  height: calc(100% - 50px);
+  background-color: #1e1e1e;
+`;
+
+const RightWrap = styled.div`
+  width: ${({ selected }) =>
+    selected === null ? "calc(100% - 50px)" : "calc(100% - 320px - 50px)"};
+
   @media (max-width: 520px) {
     display: ${({ selected }) => (selected === null ? "block" : "none")};
   }
-  `;
-
-  const RightWrap = styled.div`
-    width: ${({selected})=>selected === null ? "calc(100% - 50px)" : "calc(100% - 320px - 50px)"};
-  `;
-  
-  const RightHeader = styled.div`
-    width: 100%;
-    height: 50px;
-    display: flex;
-    overflow-x: scroll;
-    background-color: #252526;
-    > div {
-      width: 150px;
-      min-width: 150px;
-      padding: 5px 10px;
-      background-color: #333333;
-      border-right: 2px solid #1e1e1e;
-  
-      &.selected {
-        background-color: #1e1e1e;
-      }
-    }
-  `;
+`;

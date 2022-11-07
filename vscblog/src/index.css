@@ -18,7 +18,7 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: rgba(70,70,70,0.1); /*스크롤바 뒷 배경 색상*/
+  background: #1e1e1e; /*스크롤바 뒷 배경 색상*/
 }
 body {
   margin: 0;
