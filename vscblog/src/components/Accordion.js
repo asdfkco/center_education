@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
 
-function Accordion({ title, children, isBold }) {
+function Accordion({ title, children, isBold,initialExpanded }) {
   const [expended, setExpended] = useState(false);
 
   return (
