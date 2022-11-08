@@ -157,10 +157,10 @@ const IconWrap = styled.div`
   padding: 10px 0;
   cursor: pointer;
 
-  border-left: ${({ selected }) => (selected ? 2 : 0)}px solid white;
+  border-left: ${({ theme,selected }) => `${selected ? 2 : 0}px solid ${theme.color.text}`};
 
   > svg {
-    color: ${({ selected }) => (selected ? "white" : "#7a7a7a")};
+    color: ${({ theme,selected }) => (selected ? theme.color.text : "#7a7a7a")};
   }
 `;
 
@@ -185,7 +185,7 @@ const LeftContent = styled.div`
 
   > p {
     padding-bottom: 10px;
-    color: #7a7a7a;
+    color: #${({theme}) => theme.color.hover};
   }
 
   @media (max-width: 540px) {

@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 *:not(svg,path){
-  color: white;
+  color: ${({theme}) => theme.color.text};
 }
 *::-webkit-scrollbar {
   height: 7px; /* 스크롤바의 너비 */
