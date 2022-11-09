@@ -7,6 +7,20 @@ export const darkTheme = {
         selected: "#505050",
         hover: "#3c3c3c",
 
-        text : "red",
+        text : "white",
       },
 };
+
+export const lightTheme = {
+  color: {
+      primary: "#white",
+      secondary: "white",
+      third: "white",
+  
+      selected: "#999999",
+      hover: "white",
+
+      text : "black",
+    },
+};
+

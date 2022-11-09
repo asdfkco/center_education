@@ -10,7 +10,7 @@ import PostWrap from "../components/PostWrap";
 
 function Main() {
   const [selected, setSelected] = useState(null);
-  const { selectedPost, postData, openPost, setSelectedPost, setOpenPost } =
+  const { Theme,setTheme ,selectedPost, postData, openPost, setSelectedPost, setOpenPost } =
     useContext(Appcontext);
 
   const listArr = [
@@ -46,6 +46,7 @@ function Main() {
   return (
     <Wrap>
       <LeftBar>
+        <div>
         {listArr.map((one, index) => (
           <IconWrap
             selected={selected === index}
@@ -57,6 +58,12 @@ function Main() {
             {one.icon}
           </IconWrap>
         ))}
+        </div>
+        <div>
+          <div className={Theme} onClick={() => {
+            setTheme(Theme === "dark" ? "light" : "dark");
+          }}></div>
+        </div>
       </LeftBar>
 
       {selected !== null && listArr[selected] && (
@@ -174,6 +181,38 @@ const LeftBar = styled.div`
   min-width: 50px;
   height: 100%;
   background-color: ${({theme}) => theme.color.third};
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  >div:last-child{
+    padding-bottom: 30px;
+    display: flex;
+    align-items:center;
+    flex-direction: column;
+    > div{
+      height: 50px;
+      width: 30px;
+      border: 1px solid ${({theme}) => theme.color.text};
+      border-radius: 50px;
+      position: relative;
+      &::after{
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 4px;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: ${({theme}) => theme.color.text};
+        transition: 0.3s;
+      }
+      &.light::after{
+        top: 25px;
+      }
+    }
+  }
+
 `;
 
 const LeftContent = styled.div`
