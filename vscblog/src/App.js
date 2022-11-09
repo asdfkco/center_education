@@ -41,7 +41,12 @@ function App() {
           {
             type: "post",
             title: "Tech1",
-            path:"/Tech/Tech1"
+            path:"/Tech/Tech1",
+            data:{
+              date:"2022.11.09",
+              tag:["기술","리뷰"],
+              content:"내요요요요용"
+            }
           },
           {
             type: "post",

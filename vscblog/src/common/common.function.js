@@ -1,5 +1,7 @@
 /* 1개의 게시물 데이터 가ㅈㅕ오기 */
 export const getPostOne = (postData,path) => {
+  if(!path) return false;
+
 
     const patharr = path.split("/").filter(Boolean);
 

@@ -107,7 +107,31 @@ function Main() {
             );
           })}
         </RightHeader>
-        <RightContent selected={selected}>{selectedPost}</RightContent>
+        <RightContent selected={selected}>
+          {
+            (
+            () =>{
+              const data = getPostOne(postData,selectedPost);
+              return(
+                data&&(
+                <>
+                  <p>{data?.path}</p>
+                  <div>
+                    <h1>{data?.title}</h1>
+                    <p>Chanok | {data?.data?.date}</p>
+                    <div>
+                      {data?.data?.tag.map((one,index)=>(
+                        <span key={index}>{one}</span>
+                      ))}</div>
+                    <div>{data?.data?.content}</div>
+                  </div>
+                </>
+                )
+              );
+            }
+            )()
+          }
+          </RightContent>
       </RightWrap>
     </Wrap>
   );
@@ -236,6 +260,30 @@ const RightContent = styled.div`
   width: 100%;
   height: calc(100% - 50px);
   background-color: ${({theme}) => theme.color.primary};
+
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  > p{
+    color:#7a7a7a;
+  }
+  
+  > div{
+    width: 100%;
+    max-width: 600px;
+    >h1 {
+      padding: 10px 0 20px 0;
+    }
+
+    >p{
+      padding-bottom: 10px;
+      color: #7a7a7a;
+    }
+  }
+
 `;
 
 const RightWrap = styled.div`
