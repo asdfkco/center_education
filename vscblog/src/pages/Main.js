@@ -114,16 +114,16 @@ function Main() {
               const data = getPostOne(postData,selectedPost);
               return(
                 data&&(
-                <>
-                  <p>{data?.path}</p>
+                  <>
+                  <p>{data.path}</p>
                   <div>
-                    <h1>{data?.title}</h1>
-                    <p>Chanok | {data?.data?.date}</p>
+                    <h1>{data.title}</h1>
+                    <p>Chanok | {data.data?.date}</p>
                     <div>
-                      {data?.data?.tag.map((one,index)=>(
+                      {data.data?.tag.map((one,index)=>(
                         <span key={index}>{one}</span>
                       ))}</div>
-                    <div>{data?.data?.content}</div>
+                    <div>{data.data?.content}</div>
                   </div>
                 </>
                 )
@@ -280,7 +280,19 @@ const RightContent = styled.div`
 
     >p{
       padding-bottom: 10px;
+      margin-bottom: 10px;
       color: #7a7a7a;
+      border-bottom: 2px solid ${({theme}) => theme.color.text};
+    }
+
+    >div:nth-child(3){
+      padding: 10px 0 20px 0;
+      >span{
+        padding: 5px 10px;
+        margin-right: 10px;
+        border-radius: 10px;
+        background-color:${({theme}) => theme.color.selected} ;
+      }
     }
   }
 
