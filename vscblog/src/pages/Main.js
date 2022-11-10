@@ -7,6 +7,10 @@ import Content from "../components/Content";
 import Appcontext from "../context/Appcontext";
 import { getPostOne } from "../common/common.function";
 import PostWrap from "../components/PostWrap";
+import remarkGfm from 'remark-gfm';
+import ReactMarkDown from 'react-markdown'
+
+
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -122,8 +126,18 @@ function Main() {
                     <div>
                       {data.data?.tag?.map((one,index)=>(
                         <span key={index}>{one}</span>
-                      ))}</div>
-                    <div>{data.data?.content}</div>
+                      ))}
+                      </div>
+                    <div>
+                        <ReactMarkDown
+                          children=
+                            {data.data?.content}
+                          
+                          remarkPlugins={
+                            [remarkGfm]
+                          }
+                        />
+                    </div>
                   </div>
                 </>
                 )
