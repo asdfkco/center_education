@@ -73,7 +73,7 @@ function Main() {
         </LeftContent>
       )}
       <RightWrap selected={selected}>
-        <RightHeader>
+        <RightHeader visible={openPost.length !== 0 ? true : false}>
           {openPost.map((one, index) => {
             const data = getPostOne(postData, one);
 
@@ -107,7 +107,7 @@ function Main() {
             );
           })}
         </RightHeader>
-        <RightContent selected={selected}>
+        <RightContent selected={selected} visible={openPost.length !== 0 ? true : false}>
           {
             (
             () =>{
@@ -120,7 +120,7 @@ function Main() {
                     <h1>{data.title}</h1>
                     <p>Chanok | {data.data?.date}</p>
                     <div>
-                      {data.data?.tag.map((one,index)=>(
+                      {data.data?.tag?.map((one,index)=>(
                         <span key={index}>{one}</span>
                       ))}</div>
                     <div>{data.data?.content}</div>
@@ -151,6 +151,7 @@ const RightHeader = styled.div`
     width: 150px;
     min-width: 150px;
     padding: 5px 10px;
+    display: ${({visible}) => (visible ? "flex" : "none")};
     background-color: #${({theme}) => theme.color.secondary};
     border-right: 2px solid #1e1e1e;
     position: relative;
@@ -260,7 +261,7 @@ const RightContent = styled.div`
   width: 100%;
   height: calc(100% - 50px);
   background-color: ${({theme}) => theme.color.primary};
-
+  height: ${({visible}) => (visible ? "calc(100* - 50px)" : "100%")};
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
