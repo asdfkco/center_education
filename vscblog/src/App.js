@@ -5,12 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from "./pages/Main";
-import AppContext from "./context/Appcontext";
+import ThemeContext from "./context/AppContext";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import axios from "axios";
 import { darkTheme, lightTheme } from "./style/theme";
 import { GlobalStyle } from "./style/GlobalStyle";
+import axios from "axios";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,22 +25,21 @@ function App() {
   const [selectedPost, setSelectedPost] = useState("");
   const [postData, setPostData] = useState([]);
   const [openPost, setOpenPost] = useState([]);
-  const [Theme, setTheme] = useState("dark");
-
-
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     async function fetch() {
-      
-      const {data : responsePostData } = await axios.get("http://localhost:4000/post/all")
-      setPostData(responsePostData);
-    };
-
+      const { data: responsePostdata } = await axios.get(
+        "http://localhost:4000/post/all"
+      );
+      setPostData(responsePostdata);
+      console.log(responsePostdata);
+    }
     fetch();
-  },[])
+  }, []);
 
   return (
-    <AppContext.Provider
+    <ThemeContext.Provider
       value={{
         selectedPost,
         setSelectedPost,
@@ -50,15 +49,16 @@ function App() {
 
         postData,
 
-        Theme,
-        setTheme
+        theme,
+        setTheme,
       }}
     >
-      <ThemeProvider theme={Theme === "dark" ? darkTheme : lightTheme}>
+      <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
         <GlobalStyle />
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </ThemeProvider>
-    </AppContext.Provider>
+    </ThemeContext.Provider>
   );
 }
+
 export default App;

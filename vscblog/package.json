@@ -1,5 +1,5 @@
 {
-  "name": "vscblog",
+  "name": "center_react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
