@@ -1,20 +1,17 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import AppContext from "../context/AppContext";
+import Appcontext from "../context/Appcontext";
 import Accordion from "./Accordion";
 
 function Content({ type, title, children, path }) {
   const { selectedPost, setSelectedPost, openPost, setOpenPost } =
-    useContext(AppContext);
-
+    useContext(Appcontext);
   function selectedFunction() {
     setSelectedPost(path);
-
     if (!openPost.includes(path)) {
       setOpenPost([...openPost, path]);
     }
   }
-
   return type === "directory" ? (
     <Accordion title={`📂${title}`}>
       {children?.map((one, index) => (
@@ -22,24 +19,22 @@ function Content({ type, title, children, path }) {
       ))}
     </Accordion>
   ) : (
-    <PostWrap
+    <Poatwrap
       onClick={selectedFunction}
       className={selectedPost === path ? "selected" : ""}
     >
       &nbsp;&nbsp;&nbsp;&nbsp;📝{title}
-    </PostWrap>
+    </Poatwrap>
   );
 }
 export default Content;
 
-const PostWrap = styled.div`
-  margin: 5px 0;
+const Poatwrap = styled.div`
+  padding: 5px 0;
   cursor: pointer;
-
   &:not(.selected):hover {
     background-color: ${({ theme }) => theme.color.hover};
   }
-
   &.selected {
     background-color: ${({ theme }) => theme.color.selected};
   }

@@ -1,49 +1,45 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
+import { VscChevronDown, VscChevronRight } from "react-icons/vsc";
 
-function Accordion({ title, children, isBord, initialExpanded }) {
+function Accordion({ title, children, isBold, initialExpanded }) {
   const [expanded, setExpanded] = useState(initialExpanded || false);
-
   return (
     <>
-      <AccordionWrap
+      <AccordionWarp
         onClick={() => {
           setExpanded(!expanded);
         }}
       >
         {expanded ? <VscChevronDown /> : <VscChevronRight />}
-
-        <span>{isBord ? <strong>{title}</strong> : title}</span>
-      </AccordionWrap>
-      <AccordionContentWrap expanded={expanded}>
+        <span>{isBold ? <strong>{title}</strong> : title}</span>
+      </AccordionWarp>
+      <AccordionContentWarp expanded={expanded}>
         {children}
-      </AccordionContentWrap>
+      </AccordionContentWarp>
     </>
   );
 }
 
 export default Accordion;
 
-const AccordionWrap = styled.div`
-  display: flex;
+const AccordionWarp = styled.div`
   align-items: center;
+  display: flex;
   font-size: 0.8rem;
-  padding: 5px 0px;
-
+  padding: 5px 0;
+  user-select: none;
   > span {
     padding-left: 5px;
     user-select: none;
   }
 `;
-
-const AccordionContentWrap = styled.div`
-  max-height: ${({ expanded }) => (expanded ? "1000px" : "0")};
+const AccordionContentWarp = styled.div`
+  max-height: ${({ expanded }) => (expanded ? "500px" : "0")};
   overflow: hidden;
   transition: ${({ expanded }) =>
-    expanded ? "max-height 0.25s ease-in" : "max-height 0.1s ease-out"};
-
-  user-select: none;
+    expanded ? "max-height 0.25s ease-in" : "max-height 0.15s ease-out"};
   margin-bottom: 5px;
   margin-left: 15px;
+  user-select: none;
 `;

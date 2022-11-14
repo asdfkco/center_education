@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from "./pages/Main";
-import ThemeContext from "./context/AppContext";
+import AppContext from "./context/Appcontext";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./style/theme";
@@ -26,38 +26,38 @@ function App() {
   const [postData, setPostData] = useState([]);
   const [openPost, setOpenPost] = useState([]);
   const [theme, setTheme] = useState("dark");
+  const [selectedTag, setSelectedTag] = useState(null);
 
   useEffect(() => {
-    async function fetch() {
-      const { data: responsePostdata } = await axios.get(
+    async function fatch() {
+      const { data: responsePostData } = await axios.get(
         "http://localhost:4000/post/all"
       );
-      setPostData(responsePostdata);
-      console.log(responsePostdata);
+
+      setPostData(responsePostData);
     }
-    fetch();
+    fatch();
   }, []);
 
   return (
-    <ThemeContext.Provider
+    <AppContext.Provider
       value={{
         selectedPost,
         setSelectedPost,
-
+        postData,
         openPost,
         setOpenPost,
-
-        postData,
-
         theme,
         setTheme,
+        selectedTag,
+        setSelectedTag,
       }}
     >
       <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
         <GlobalStyle />
         <RouterProvider router={router} />
       </ThemeProvider>
-    </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 }
 
