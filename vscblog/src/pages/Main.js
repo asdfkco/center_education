@@ -132,7 +132,7 @@ function Main() {
                   <p>{data?.path}</p>
                   <div>
                     <h1>{data?.title}</h1>
-                    <p>Sihyeon | {data?.data?.date}</p>
+                    <p>chanok | {data?.data?.date}</p>
                     <div>
                       {data?.data?.tag?.map((one, index) => (
                         <span key={index}>{one}</span>
